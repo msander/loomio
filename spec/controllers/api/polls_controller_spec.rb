@@ -11,6 +11,7 @@ describe API::PollsController do
   let!(:poll) { create :poll, title: "POLL!", discussion: discussion, author: user }
   let(:another_poll) { create :poll, title: "ANOTHER", discussion: another_discussion }
   let(:closed_poll) { create :poll, title: "CLOSED", author: user, closed_at: 1.day.ago }
+  let(:discarded_poll) { create :poll, title: "DISCARDED", author: user, discarded_at: 1.day.ago, discussion: discussion }
   let(:non_group_poll) { create :poll }
   let(:poll_params) {{
     title: "hello",
@@ -38,6 +39,15 @@ describe API::PollsController do
       get :show, params: { id: poll.key }
       expect(response.status).to eq 403
     end
+
+    it 'does not show a poll that has been discarded' do
+      sign_in user
+      get :show, params: { id: discarded_poll.key }
+      puts response.body
+      expect(response.status).to eq 403
+    end
+
+
   end
 
   describe 'index' do

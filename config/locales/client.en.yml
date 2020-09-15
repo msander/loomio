@@ -282,6 +282,7 @@ en:
       inactive: 'There is a deactivated account associated with this email address. If you want to reactivate your account, contact us.'
 
   error_page:
+    record_discarded_error: 'This record has been deleted' 
     forbidden: 'You do not have permission to do this.'
     page_not_found: 'We were unable to find that. It may have been deleted or moved.'
     internal_server_error: 'We''re sorry, but something went wrong. Please try again.'
